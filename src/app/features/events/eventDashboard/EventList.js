@@ -1,6 +1,4 @@
 import React from 'react'
-import { Button, Icon, Item, List, Segment } from 'semantic-ui-react'
-import EventListAttendee from './EventListAttendee'
 import EventListItem from './EventListItem'
 
 function EventList(props) {
