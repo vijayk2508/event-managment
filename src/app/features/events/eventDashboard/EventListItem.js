@@ -4,34 +4,9 @@ import { Button, Icon, Item, List, Segment } from 'semantic-ui-react'
 import EventListAttendee from './EventListAttendee'
 
 function EventListItem(props) {
-  console.log('props.event', props.event)
-  const { attendees, hostedBy, hostPhotoURL, id, title, date, category, description, venue } =
-    props.event /*
-   {
-    id: '1',
-    title: 'Trip to Empire State building',
-    date: '2018-03-21',
-    category: 'culture',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
-    city: 'NY, USA',
-    venue: 'Empire State Building, 5th Avenue, New York, NY, USA',
-    hostedBy: 'Bob',
-    hostPhotoURL: 'https://randomuser.me/api/portraits/men/20.jpg',
-    attendees: [
-      {
-        id: 'a',
-        name: 'Bob',
-        photoURL: 'https://randomuser.me/api/portraits/men/20.jpg',
-      },
-      {
-        id: 'b',
-        name: 'Tom',
-        photoURL: 'https://randomuser.me/api/portraits/men/22.jpg',
-      },
-    ],
-  },
-  */
+  const { attendees, hostedBy, hostPhotoURL, title, date, category, description, venue } =
+    props.event
+  const { setformOpen, setSelectedEvent, handleDeleteEvent } = props
   return (
     <>
       <Segment.Group>
@@ -46,6 +21,7 @@ function EventListItem(props) {
               <Item.Content>
                 <Item.Header content={title}></Item.Header>
                 <Item.Description>{hostedBy}</Item.Description>
+                <Item.Content>{category}</Item.Content>
               </Item.Content>
             </Item>
           </Item.Group>
@@ -67,7 +43,25 @@ function EventListItem(props) {
         </Segment>
         <Segment clearing>
           <span>{description}</span>
-          <Button color='teal' floated='right' content='View'></Button>
+          <Button
+            color='red'
+            floated='right'
+            content='Delete'
+            onClick={e => {
+              e.preventDefault()
+              handleDeleteEvent(props.event.id)
+            }}
+          ></Button>
+          <Button
+            color='teal'
+            floated='right'
+            content='View'
+            onClick={e => {
+              e.preventDefault()
+              setSelectedEvent(props.event)
+              setformOpen(true)
+            }}
+          ></Button>
         </Segment>
       </Segment.Group>
     </>

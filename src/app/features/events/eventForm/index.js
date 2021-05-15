@@ -11,31 +11,30 @@ let formFieldData = [
   { type: 'date', placeholder: 'Date', name: 'date' },
 ]
 
-let initialState = {
-  title: 'Trip to Empire State building',
-  date: '2018-03-21',
-  category: 'culture',
-  description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
-  city: 'NY, USA',
-  venue: 'Empire State Building, 5th Avenue, New York, NY, USA',
-  hostedBy: 'Bob',
-  hostPhotoURL: 'https://randomuser.me/api/portraits/men/20.jpg',
-  attendees: [
-    {
-      id: 'a',
-      name: 'Bob',
-      photoURL: 'https://randomuser.me/api/portraits/men/20.jpg',
-    },
-    {
-      id: 'b',
-      name: 'Tom',
-      photoURL: 'https://randomuser.me/api/portraits/men/22.jpg',
-    },
-  ],
-}
 function EventForm(props) {
-  const { setformOpen, handleCreateEvent } = props
+  const { setformOpen, handleCreateEvent, selectedEvent, handleUpdateEvent } = props
+  const initialState = selectedEvent ?? {
+    title: '',
+    date: '',
+    category: '',
+    description: '',
+    city: '',
+    venue: '',
+    hostedBy: 'Bob',
+    hostPhotoURL: 'https://randomuser.me/api/portraits/men/20.jpg',
+    attendees: [
+      {
+        id: 'a',
+        name: 'Bob',
+        photoURL: 'https://randomuser.me/api/portraits/men/20.jpg',
+      },
+      {
+        id: 'b',
+        name: 'Tom',
+        photoURL: 'https://randomuser.me/api/portraits/men/22.jpg',
+      },
+    ],
+  }
   const [eventDetails, seteventDetails] = useState(initialState)
 
   const handleChange = e => {
@@ -45,7 +44,7 @@ function EventForm(props) {
 
   return (
     <Segment clearing>
-      <Header>Create new event</Header>
+      <Header>{`${selectedEvent ? 'Edit' : 'Create'} New Event`}</Header>
       <Form>
         {formFieldData.map((item, idx) => {
           return (
@@ -67,7 +66,13 @@ function EventForm(props) {
           content='Submit'
           onClick={e => {
             e.preventDefault()
-            handleCreateEvent({ ...eventDetails, id: cuid() })
+            if (selectedEvent) {
+              handleUpdateEvent({ ...eventDetails })
+            } else {
+              handleCreateEvent({ ...eventDetails, id: cuid() })
+            }
+            seteventDetails(initialState)
+            setformOpen(false)
           }}
         />
         <Button
