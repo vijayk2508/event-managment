@@ -1,23 +1,20 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import { Button, Container, Menu } from 'semantic-ui-react'
+import routeLinkList from '../../../../constants/routeLinkList'
 
 export default function NavBar(props) {
-  const { setformOpen } = props
   return (
     <Menu inverted fixed='top'>
       <Container>
-        <Menu.Item header>Re-events</Menu.Item>
-        <Menu name='Events'></Menu>
-        <Menu.Item>
-          <Button
-            onClick={e => {
-              e.preventDefault()
-              setformOpen(true)
-            }}
-            positive
-            inverted
-            content='Create Event'
-          ></Button>
+        <Menu.Item as={NavLink} exact to={routeLinkList.Home} header>
+          <img src='/assets/logo.png' style={{ marginRight: 15 }} />
+          Re-events
+        </Menu.Item>
+        <Menu.Item as={NavLink} to={routeLinkList.Events} name='Events'></Menu.Item>
+        <Menu.Item as={NavLink} to={routeLinkList.CreateEvent}>
+          <Button positive inverted content='Create Event'></Button>
         </Menu.Item>
         <Menu.Item position='right'>
           <Button positive inverted content='Login'></Button>

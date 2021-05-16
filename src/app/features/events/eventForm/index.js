@@ -90,4 +90,11 @@ function EventForm(props) {
   )
 }
 
+EventForm.defaultProps = {
+  setformOpen: obj => {},
+  handleCreateEvent: obj => {},
+  selectedEvent: null,
+  handleUpdateEvent: obj => {},
+}
+
 export default EventForm

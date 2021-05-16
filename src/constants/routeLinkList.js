@@ -5,7 +5,7 @@ const routeLinkList = {
   },
   Home: '/',
   Events: '/events',
-  CreateEvent: 'createEvent',
+  CreateEvent: '/createEvent',
   NotAuthorized: '/not-authorized',
   NonAuthPageNotFound: '/*',
   MyProfile: 'MyProfile',
