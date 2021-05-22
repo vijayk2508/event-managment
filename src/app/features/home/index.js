@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Container, Header, Icon, Image, Segment } from 'semantic-ui-react'
-import routeLinkList from '../../../constants/routeLinkList'
+import { routeLinkList } from '../../../constants/routeLinkList'
 
 function Home({ history }) {
   return (

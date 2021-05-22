@@ -8,7 +8,12 @@ const routeLinkList = {
   CreateEvent: '/createEvent',
   NotAuthorized: '/not-authorized',
   NonAuthPageNotFound: '/*',
-  MyProfile: 'MyProfile',
+  MyProfile: '/MyProfile',
+  Manage: '/manage',
 }
 
-export default routeLinkList
+const params = {
+  EventId: 'eventid',
+}
+
+export { routeLinkList, params }

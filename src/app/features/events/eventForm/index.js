@@ -1,6 +1,8 @@
 import cuid from 'cuid'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Button, Form, Header, Segment } from 'semantic-ui-react'
+import { routeLinkList } from '../../../../constants/routeLinkList'
 
 let formFieldData = [
   { type: 'text', placeholder: 'Event title', name: 'title' },
@@ -12,7 +14,8 @@ let formFieldData = [
 ]
 
 function EventForm(props) {
-  const { setformOpen, handleCreateEvent, selectedEvent, handleUpdateEvent } = props
+  console.log('hi')
+  const { selectedEvent } = props
   const initialState = selectedEvent ?? {
     title: '',
     date: '',
@@ -64,26 +67,23 @@ function EventForm(props) {
           floated='right'
           positive
           content='Submit'
-          onClick={e => {
-            e.preventDefault()
-            if (selectedEvent) {
-              handleUpdateEvent({ ...eventDetails })
-            } else {
-              handleCreateEvent({ ...eventDetails, id: cuid() })
-            }
-            seteventDetails(initialState)
-            setformOpen(false)
-          }}
+          // onClick={e => {
+          //   e.preventDefault()
+          //   if (selectedEvent) {
+          //     handleUpdateEvent({ ...eventDetails })
+          //   } else {
+          //     handleCreateEvent({ ...eventDetails, id: cuid() })
+          //   }
+          //   seteventDetails(initialState)
+          //   setformOpen(false)
+          // }}
         />
         <Button
           type='submit'
           floated='right'
           content='Cancel'
-          onClick={e => {
-            e.preventDefault()
-            setformOpen(false)
-            seteventDetails(initialState)
-          }}
+          as={Link}
+          to={routeLinkList.Events}
         />
       </Form>
     </Segment>
@@ -91,10 +91,10 @@ function EventForm(props) {
 }
 
 EventForm.defaultProps = {
-  setformOpen: obj => {},
-  handleCreateEvent: obj => {},
+  setformOpen: () => {},
+  handleCreateEvent: () => {},
   selectedEvent: null,
-  handleUpdateEvent: obj => {},
+  handleUpdateEvent: () => {},
 }
 
 export default EventForm

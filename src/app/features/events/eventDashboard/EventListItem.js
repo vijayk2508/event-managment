@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Button, Icon, Item, List, Segment } from 'semantic-ui-react'
+import { routeLinkList } from '../../../../constants/routeLinkList'
 import EventListAttendee from './EventListAttendee'
 
 function EventListItem(props) {
   const { attendees, hostedBy, hostPhotoURL, title, date, category, description, venue } =
     props.event
-  const { setformOpen, setSelectedEvent, handleDeleteEvent } = props
+  const { handleDeleteEvent } = props
   return (
     <>
       <Segment.Group>
@@ -56,11 +58,13 @@ function EventListItem(props) {
             color='teal'
             floated='right'
             content='View'
-            onClick={e => {
-              e.preventDefault()
-              setSelectedEvent(props.event)
-              setformOpen(true)
-            }}
+            // onClick={e => {
+            //   e.preventDefault()
+            //   setSelectedEvent(props.event)
+            //   setformOpen(true)
+            // }}
+            as={Link}
+            to={`${routeLinkList.Events}/${props.event.id}`}
           ></Button>
         </Segment>
       </Segment.Group>
