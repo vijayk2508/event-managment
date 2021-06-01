@@ -1,14 +1,17 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button, Icon, Item, List, Segment } from 'semantic-ui-react'
 import { routeLinkList } from '../../../../constants/routeLinkList'
+import { deleteEvent } from '../../../redux/action-reducers/event/event.action'
 import EventListAttendee from './EventListAttendee'
 
 function EventListItem(props) {
   const { attendees, hostedBy, hostPhotoURL, title, date, category, description, venue } =
     props.event
   const { handleDeleteEvent } = props
+  const dispatch = useDispatch()
   return (
     <>
       <Segment.Group>
@@ -51,7 +54,7 @@ function EventListItem(props) {
             content='Delete'
             onClick={e => {
               e.preventDefault()
-              handleDeleteEvent(props.event.id)
+              dispatch(deleteEvent(props.event.id))
             }}
           ></Button>
           <Button

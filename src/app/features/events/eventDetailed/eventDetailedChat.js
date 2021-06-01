@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Comment, Form, Header, Segment } from 'semantic-ui-react'
 
-function EventDetailedChat() {
+function EventDetailedChat({ attendees }) {
   return (
     <>
       <Segment textAlign='center' attached='top' inverted color='teal' style={{ border: 'none' }}>
