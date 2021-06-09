@@ -1,4 +1,4 @@
-export const sampleData = [
+export const eventData = [
   {
     id: '1',
     title: 'Trip to Empire State building',
@@ -47,4 +47,13 @@ export const sampleData = [
       },
     ],
   },
+]
+
+export const categoryData = [
+  { key: 'drinks', text: 'Drinks', value: 'drinks' },
+  { key: 'culture', text: 'Culture', value: 'culture' },
+  { key: 'film', text: 'Film', value: 'film' },
+  { key: 'food', text: 'Food', value: 'food' },
+  { key: 'music', text: 'Music', value: 'music' },
+  { key: 'travel', text: 'Travel', value: 'travel' },
 ]
