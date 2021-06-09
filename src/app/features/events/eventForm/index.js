@@ -1,8 +1,10 @@
 import cuid from 'cuid'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { Button, Form, Header, Segment } from 'semantic-ui-react'
-import { routeLinkList } from '../../../../constants/routeLinkList'
+import { params, routeLinkList } from '../../../../constants/routeLinkList'
+import { createEvent, updateEvent } from '../../../redux/action-reducers/event/event.action'
 
 let formFieldData = [
   { type: 'text', placeholder: 'Event title', name: 'title' },
@@ -13,9 +15,13 @@ let formFieldData = [
   { type: 'date', placeholder: 'Date', name: 'date' },
 ]
 
-function EventForm(props) {
-  console.log('hi')
-  const { selectedEvent } = props
+function EventForm() {
+  const paramsData = useParams()
+  const eventId = paramsData[params.EventId]
+  let { events } = useSelector(state => state.eventReducer)
+  const selectedEvent = events?.find(objEvent => objEvent?.id === eventId)
+  const dispatch = useDispatch()
+  const history = useHistory()
   const initialState = selectedEvent ?? {
     title: '',
     date: '',
@@ -38,6 +44,7 @@ function EventForm(props) {
       },
     ],
   }
+
   const [eventDetails, seteventDetails] = useState(initialState)
 
   const handleChange = e => {
@@ -67,16 +74,15 @@ function EventForm(props) {
           floated='right'
           positive
           content='Submit'
-          // onClick={e => {
-          //   e.preventDefault()
-          //   if (selectedEvent) {
-          //     handleUpdateEvent({ ...eventDetails })
-          //   } else {
-          //     handleCreateEvent({ ...eventDetails, id: cuid() })
-          //   }
-          //   seteventDetails(initialState)
-          //   setformOpen(false)
-          // }}
+          onClick={e => {
+            e.preventDefault()
+            dispatch(
+              selectedEvent
+                ? updateEvent({ ...eventDetails })
+                : createEvent({ ...eventDetails, id: cuid() })
+            )
+            history.push(routeLinkList.Events)
+          }}
         />
         <Button
           type='submit'
@@ -88,13 +94,6 @@ function EventForm(props) {
       </Form>
     </Segment>
   )
-}
-
-EventForm.defaultProps = {
-  setformOpen: () => {},
-  handleCreateEvent: () => {},
-  selectedEvent: null,
-  handleUpdateEvent: () => {},
 }
 
 export default EventForm

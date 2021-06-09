@@ -10,7 +10,6 @@ import EventListAttendee from './EventListAttendee'
 function EventListItem(props) {
   const { attendees, hostedBy, hostPhotoURL, title, date, category, description, venue } =
     props.event
-  const { handleDeleteEvent } = props
   const dispatch = useDispatch()
   return (
     <>

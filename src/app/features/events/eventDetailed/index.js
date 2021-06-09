@@ -14,7 +14,6 @@ function EventDetail() {
   let { events } = useSelector(state => state.eventReducer)
   const event = events.find(objEvent => objEvent.id === eventId)
   const history = useHistory()
-  console.log('eventDetail', event)
 
   useEffect(() => {
     if (!eventId) {

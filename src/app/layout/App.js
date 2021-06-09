@@ -1,4 +1,4 @@
-import { Route } from 'react-router'
+import { Route, useLocation } from 'react-router'
 import { Container } from 'semantic-ui-react'
 import './App.css'
 
@@ -10,6 +10,7 @@ import NavBar from '../features/events/nav/NavBar'
 import Home from '../features/home'
 
 function App() {
+  const { key } = useLocation()
   return (
     <>
       <Route path={routeLinkList.Home} component={Home} exact></Route>
@@ -28,7 +29,7 @@ function App() {
               <Route
                 path={[routeLinkList.CreateEvent, `${routeLinkList.Manage}/:${params.EventId}`]}
                 component={EventForm}
-                //exact
+                key={key}
               ></Route>
             </Container>
           </>
