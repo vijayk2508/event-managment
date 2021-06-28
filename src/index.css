@@ -131,8 +131,8 @@ body {
 } */
 
 .event-image {
-    filter: brightness(30%);
-  }
+  filter: brightness(30%);
+}
 
 .event-image-text {
   position: absolute;
@@ -145,5 +145,9 @@ body {
 
 /* remove border from inverted segments */
 .ui.inverted.attached.segment {
-    border: none;
+  border: none;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
 }
