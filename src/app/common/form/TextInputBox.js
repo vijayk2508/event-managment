@@ -4,7 +4,6 @@ import { FormField, Label } from 'semantic-ui-react'
 
 function TextInputBox({ label, ...props }) {
   const [field, meta] = useField(props)
-  console.log('TextInputBox', field, meta)
   return (
     <FormField error={meta.touched && !!meta.error} key={props.idx}>
       {/* <Field

@@ -11,12 +11,14 @@ import { categoryData } from '../../../api/sampleData'
 import SelectInputBox from '../../../common/form/SelectInputBox'
 import { createEvent, updateEvent } from '../../../redux/action-reducers/event/event.action'
 import cuid from 'cuid'
+import DateInputBox from '../../../common/form/DateInputBox'
 
 const FIELDTYPE = {
   HEADER: 'header',
   INPUT: 'input',
   TEXTAREA: 'textarea',
   SELECT: 'select',
+  DATE: 'date',
 }
 
 let formFieldData = [
@@ -39,7 +41,16 @@ let formFieldData = [
   },
   { fieldType: FIELDTYPE.INPUT, type: 'text', placeholder: 'City', name: 'city', index: 6 },
   { fieldType: FIELDTYPE.INPUT, type: 'text', placeholder: 'Venue', name: 'venue', index: 7 },
-  { fieldType: FIELDTYPE.INPUT, type: 'date', placeholder: 'Date', name: 'date', index: 8 },
+  {
+    fieldType: FIELDTYPE.DATE,
+    placeholder: 'Date',
+    name: 'date',
+    index: 8,
+    timeFormat: 'HH:mm',
+    showTimeSelect: true,
+    timeCaption: 'time',
+    dateFormat: 'MMMM d, yyyy h:mm a',
+  },
 ]
 
 const validationSchema = Yup.object({
@@ -101,16 +112,23 @@ function EventForm() {
         <Form className='ui form'>
           {formFieldData.map(item => {
             let type = item.fieldType
+
+            let data = {
+              ...item,
+            }
+            delete data.fieldType
             switch (type) {
               case FIELDTYPE.HEADER:
-                return <Header {...item} key={item.index}></Header>
+                return <Header {...data} key={data.index}></Header>
               case FIELDTYPE.TEXTAREA:
-                return <TextAreaBox idx={item.index} key={item.index} {...item} />
+                return <TextAreaBox idx={data.index} key={data.index} {...data} />
               case FIELDTYPE.SELECT:
-                return <SelectInputBox idx={item.index} key={item.index} {...item} />
+                return <SelectInputBox idx={data.index} key={data.index} {...data} />
+              case FIELDTYPE.DATE:
+                return <DateInputBox idx={data.index} key={data.index} {...data} />
               case FIELDTYPE.INPUT:
               default:
-                return <TextInputBox idx={item.index} key={item.index} {...item} />
+                return <TextInputBox idx={data.index} key={data.index} {...data} />
             }
           })}
           <Button type='submit' floated='right' positive content='Submit' />
