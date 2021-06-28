@@ -6,6 +6,7 @@ import { Button, Icon, Item, List, Segment } from 'semantic-ui-react'
 import { routeLinkList } from '../../../../constants/routeLinkList'
 import { deleteEvent } from '../../../redux/action-reducers/event/event.action'
 import EventListAttendee from './EventListAttendee'
+import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 
 function EventListItem(props) {
   const { attendees, hostedBy, hostPhotoURL, title, date, category, description, venue } =
@@ -32,7 +33,7 @@ function EventListItem(props) {
         </Segment>
         <Segment>
           <span>
-            <Icon name='clock' /> {date}
+            <Icon name='clock' /> {format(date, 'MMMM d, yyyy h:mm a')}
             <Icon name='marker' /> {venue}
           </span>
         </Segment>
